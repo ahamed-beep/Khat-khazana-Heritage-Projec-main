@@ -12,7 +12,6 @@ import ForgotPassword from './Components/ForgotPassword';
 import ResetPassword from './Components/ResetPassword';
 import Admin from './Components/Admin/Admin';
 import SubmissionForm from './Components/SubmissionForm';
-import UsersList from './Components/UserList';
 import EditUser from './Components/Singleuserview';
 import IndianMemoryProject from './Components/Supoort';
 import ProductList from './Components/Poruductlist';
@@ -34,7 +33,6 @@ const App = () => {
           <Route element={<Contactus />} path="/contact" />
           <Route element={<ForgotPassword />} path="/forgot" />
           <Route element={<SubmissionForm />} path="/sub" />
-          <Route element={<UsersList />} path="/userlist" />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/support" element={<IndianMemoryProject />} />
           <Route path="/productlist" element={<ProductList/>} />
