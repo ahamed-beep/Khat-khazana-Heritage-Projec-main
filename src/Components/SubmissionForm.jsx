@@ -1,0 +1,289 @@
+import { FaWhatsapp } from 'react-icons/fa';
+import Nax from './Nax';
+
+const SubmissionForm = () => {
+  return (
+    <div>
+        <Nax/>
+   
+    <div className="flex mt-18 flex-col lg:flex-row px-4 py-8 max-w-screen-xl flex justify-around mx-auto">
+      
+      {/* Left Column */}
+      <div className="lg:w-2/6 w-full  px-4 mb-8 lg:mb-0">
+        <div className="flex  flex-col  items-center mb-4">
+         <div className="group w-12 h-12 flex items-center justify-center rounded-full bg-green-600 hover:bg-white border-2 border-green-600 transition duration-300 mr-4">
+  <a href="https://wa.me/yourphonenumber" target="_blank" rel="noopener noreferrer">
+    <FaWhatsapp size={24} className="text-white group-hover:text-green-600 transition duration-300" />
+  </a>
+</div>
+          <h2 className="pt-[10px] font-semibold font-[family]: Font family (e.g., font-sans, font-serif) ">Whats App this Page</h2>
+        </div>
+
+        <hr className="border-t border-dotted border-gray-400 my-4" />
+
+        <h1 className="text-3xl font-semibold font-[family]: text-gray Font family (e.g., font-sans, font-serif) bg-[#ffffff]  text-black inline-block  px-2 mb-2 ">TERMS OF SUBMISSION</h1>
+        <p className="text-yellow-700 font-semibold text-sm pt-[15px]">
+          INDIAN MEMORY PROJECT DOES NOT OWN ANY RIGHTS TO ANY IMAGE FOR THIRD PARTY LICENSING. NEITHER DOES IT CHARGE A FEE TO PUBLISH A POST.
+        </p>
+         
+<div className="p-4">
+  <h1 className="text-0xl font-semibold py-5">Submission Requirements</h1>
+  <ul className="list-disc pl-4">
+    <li>Photograph Scan – 10″ Width, 300 DPI, Jpeg</li>
+    <li>Photo Caption Narrative text that can include:
+      <ul className="list-disc pl-8">
+        <li>Who are the people in the photograph?</li>
+        <li>Where did the family originate?</li>
+        <li>What did they do?</li>
+        <li>Why was the photograph taken?</li>
+        <li>What other memories does it evoke?</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h1 className=" font-semibold mt-4 py-5">CONDITIONS FOR CONTRIBUTIONS</h1>
+  <ul className="list-disc pl-4">
+    <li>Photographs and documents only from before the year 1992 will be considered.</li>
+    <li>Your submission photographs can be from anywhere in the world, as long as the story has a connection to the people and/or places of South Asia / Indian Subcontinent.</li>
+    <li>The “Uploader”/”Sender” must be the guardian/owner of the photograph and letters.</li>
+    <li>Ensure you know of the people in the photograph. Asking for information from relatives, family and friends can offer new information.</li>
+    <li>A short essay, paragraph or story points about the photographs is mandatory. Photographs without the essay or short points will not be considered.</li>
+    <li>Photographs could be of your parents, relatives, friends, associates, extended family, grandparents and/or higher in ancestry.</li>
+    <li>Names, approximate/exact year the image was taken, location in picture, profession/s, ethnicity, and other personal historical details you’d like to add.</li>
+    <li>You agree to your submissions being used in publications, press, exhibitions (national and International), slide presentations, talks, workshops meant for educational and promotion purposes only by Indian Memory Project in all existing and future media.</li>
+    <li>If there are queries for your images by third parties, the owner/guardian will be contacted separately for permissions and/or licensing details.</li>
+    <li>Indian Memory Project charges a facilitation fee, a non-negotiable Industry Standard 50% facilitation fee + GST of the licensed an image.</li>
+    <li>Once posted, the story or the image will not be retracted – temporarily or permanently.</li>
+    <li>Pictures, Letters and Documents are administered. All text is fact-checked, proofed and edited to suit the format of the project.</li>
+    <li>Indian Memory Project is not responsible for any conflict or disagreement caused within your family or friends by uploading a picture/letter and narrative on its site.</li>
+    <li>Indian Memory Project follows up with you for more details that we need to compose a cohesive narrative.</li>
+  </ul>
+</div>
+
+
+ 
+      </div>
+
+      {/* Right Column */}
+      <div className="lg:w-3/5 w-fullf float-right px-4 ">
+      <hr className="border-black border-dotted border-t w-full my-[20px]" />
+
+        <h2 className="text-lg font-semibold font-[family]: Font family (e.g., font-sans, font-serif) mb-4 text-center">Submission form to contribute a story to the archive.</h2>
+        <p className="text-sm leading-[1.9] mb-6">
+          Please do read the Terms of Submission on the left. Once the entry is submitted it will be regarded in bounds with all legal permissions sought for inclusion to this archive hereafter. All entries to the archive are researched, fact checked, edited and administered
+        </p>
+
+        <hr className="border-t border-dotted border-gray-400 my-9" />
+
+        <p className="text-sm leading-[1.9] pb-9">
+          If the form misbehaves, you can instead send us your submission by email with the subject line <>‘Story Contribution’</>  <br />
+          <a href="mailto:hello@indianmemoryproject.com" className="text-black   font-semibold">hello@indianmemoryproject.com</a>
+        </p>
+          
+<div class="bg-[#eeeeee] p-6 max-w-4xl  mx-auto text-black">
+ <div className="border border-none h-1 py-3
+  w-1/5"></div>
+  <hr className="border-gray-300 dotted pt-4 border-t-2" />
+
+  {/* <h1 class="text-xl text-[12px] font-sans mb-6">Submission Form</h1> */}
+  <form class="space-y-4 ">
+
+    {/* <!-- Name --> */}
+    <div>
+      <label class="block text-[12px] font-sans  font-semibold ">Full Name of Contributor *</label> <input 
+  type="text" 
+  required 
+  class="w-2/4 p-2 bg-[#ffffff] border my-3 border-transparent my-3 h-[40px] focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none "
+/>
+
+    </div>
+
+    {/* <!-- Location --> */}
+    <div>
+      <label class="block text-[12px] font-sans font-semibold">Current Location of Contributor *</label>
+      <input type="text" required class="w-2/4 p-2 my-3 bg-[#ffffff] my-3 h-[40px] border border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none  " />
+    </div>
+
+    {/* <!-- Phone --> */}
+    <div>
+      <label class="block text-[12px] font-sans font-semibold">Phone (Include country code) *</label>
+      <input type="tel" required class="w-2/4 p-2 bg-[#ffffff] my-3 h-[40px] border border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none " />
+    </div>
+
+    {/* <!-- Alternate Phone --> */}
+    <div>
+      <label class="block text-[12px] font-sans font-semibold">Alternate Contact Number</label>
+      <input type="tel" class="w-2/4 p-2 bg-[#ffffff] border my-3 h-[40px] border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none " />
+    </div>
+
+    {/* <!-- Email --> */}
+    <div>
+      <label class="block text-[12px] font-sans font-semibold">Email *</label>
+      <input type="email" required class="w-2/4 p-2 bg-[#ffffff] my-3 h-[40px] border border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none " />
+    </div>
+
+    {/* <!-- Social Media --> */}
+    <div>
+      <label class="block text-[12px] font-sans font-semibold my-3">Social Media Profile Link</label>
+      <input type="url" class="w-2/4 p-2 bg-[#ffffff] bordermy-3 h-[40px] border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none " />
+    </div>
+
+    {/* <!-- Permission Checkbox --> */}
+    <div>
+      <label class="block text-[12px] font-sans mb-2  ">Are you the guardian /owner of the image? *</label>
+      <label class="inline-flex items-center px-3"><input type="checkbox" class="mr-2" />Yes</label>
+      <label class="inline-flex items-center"><input type="checkbox" class="mr-2" />No</label>
+    </div>
+
+    {/* <!-- Instructions --> */}
+    <div class="mb-6  p-4 rounded shadow">
+      <h2 class="text-xl font-semibold mb-2 text-[12px] font-sans py-4">Instructions</h2>
+      <ol class="list-decimal list-inside space-y-1 text-sm">
+        <li>Please read the terms of submission on the left (above on mobile) carefully.</li>
+        <li>Fill in all your name, phone, email and any one social media contact. <strong>*Required Details*</strong></li>
+        <li>Scan a selected image (Photograph / Letter) in 300 DPI (dots per inch) | Image Size – Width 10 inches</li>
+        <li>Save in Jpeg format (Image Quality – 8)</li>
+        <li>Write your story/ narrative about the image in a text/word file first and save it.</li>
+        <li>Copy and paste the text in the Narrative field below.</li>
+        <li>Upload the Jpeg file in the IMAGE UPLOAD field.</li>
+        <li>Verify.</li>
+        <li>Click on Submit.</li>
+      </ol>
+    </div>
+
+    {/* <!-- Image Type --> */}
+    <div>
+      <label class="block font-semibold text-[12px] font-sans ">Your visual attachment is a *</label>
+      <div class="flex flex-col gap-2 mt-2">
+        <label><input type="checkbox" class="mr-2" /> Photograph</label>
+        <label><input type="checkbox" class="mr-2" /> Letter</label>
+        <label><input type="checkbox" class="mr-2" /> Other</label>
+      </div>
+    </div>
+
+    {/* <!-- Purpose --> */}
+    {/* <div>
+      <label class="block font-semibold">Purpose of Submission</label>
+      <div class="flex flex-col gap-2 mt-2">
+        <label><input type="checkbox" class="mr-2" /> Add to online archive</label>
+        <label><input type="checkbox" class="mr-2" /> Use in book</label>
+        <label><input type="checkbox" class="mr-2" /> Use in film or documentary</label>
+        <label><input type="checkbox" class="mr-2" /> For educational material</label>
+        <label><input type="checkbox" class="mr-2" /> Other</label>
+      </div>
+    </div>
+
+    {/* <!-- Source --> */}
+    {/* <div>
+      <label class="block font-semibold">Source of Visual Material *</label>
+      <div class="flex flex-col gap-2 mt-2">
+        <label><input type="checkbox" class="mr-2" /> Family Archive</label>
+        <label><input type="checkbox" class="mr-2" /> Found on social media</label>
+        <label><input type="checkbox" class="mr-2" /> Found online</label>
+        <label><input type="checkbox" class="mr-2" /> Other</label>
+      </div>
+    </div> */}
+
+    {/* <!-- Other Source --> */}
+    <div>
+      <label class="block font-semibold text-[12px] font-sans ">If Other, please specify</label>
+      <input type="text" class="w-2/4 p-2 bg-[#ffffff] border my-3 border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none " />
+    </div>
+
+    {/* <!-- Image Uploader --> */}
+    <div>
+      <h3 class="text-lg font-semibold mb-1 py-3 text-[12px] font-sans">PHOTOGRAPHS SPECS</h3>
+      <p class="text-sm text-gray-600 mb-2">Hi Res Jpegs only. 10″ width scanned in 300 DPI</p>
+      <label class="block font-semibold text-[12px] font-sans">Upload Image (JPEG format only) *</label>
+      <input type="file" accept="image/jpeg" required class="w-2/4  border border-gray-400 bg-[#ffffff] file:bg-gray-200 file:mr-4 file:py-1 file:px-4 file:rounded file:border-0" />
+    </div>
+
+    {/* <!-- Date --> */}
+    <div>
+      <label class="block font-semibold text-[12px] font-sans">Date of visual material (if known)</label>
+      <div class="flex gap-4">
+        <input type="text" placeholder="dd/mm/yyyy" class="w-2/4 p-2 bg-[#ffffff] border my-3 h-[40px] border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none " />
+      </div>
+    </div>
+
+    {/* <!-- City --> */}
+    <div>
+      <label class="block font-semibold text-[12px] font-sans">Place the image was taken *</label>
+      <input type="text" class="w-2/4 p-2 bg-[#ffffff] border border-transparent my-3 h-[40px] focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none " required />
+    </div>
+
+    {/* <!-- Photographer --> */}
+    <div>
+      <label class="block font-semibold text-[12px] font-sans">Photograph Caption *</label>
+      <input type="text" class="w-2/4 p-2 bg-[#ffffff] border border-transparent my-3 h-[40px] focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none " required />
+      <p style={{fontSize:'9px'}}>Name the people in the photograph.</p>
+    </div>
+
+    {/* <!-- Narrative --> */}
+    <div>
+      <h1 className='font-semibold text-[12px] font-sans' >PASTE A NARRATIVE ABOUT THE IMAGE BELOW</h1>
+      <p className='py-4 ' style={{fontSize:'9px'}}>      Short or Long Essay or a Paragraph about this image.
+</p>
+
+      <label class="block font-semibold text-[12px] font-sans my-3">Narrative (Optional, but we encourage one!)</label>
+      <textarea rows="4" class="w-full p-2  p-2 bg-[#ffffff] border border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none "></textarea>
+    </div>
+
+    {/* <!-- Confirmation --> */}
+    <div class="flex flex-col  gap-2">
+      <label class="block font-semibold text-[12px] font-sans">Have you uploaded an image?</label>
+      <label><input type="checkbox" class="mr-2" /> Yes</label>
+      <label class="block font-semibold text-[12px] font-sans">Have you added a Narrative ?</label>
+      <label><input type="checkbox" class="mr-2" /> Yes</label>
+      <label class="block font-semibold text-[12px] font-sans">Is the image from before the Year 1992? *</label>
+      <label><input type="checkbox" class="mr-2" /> Yes</label>
+      <label><input type="checkbox" class="mr-2" /> No</label>
+      <label class="block font-semibold text-[12px] font-sans">Have you read the Terms of Submissions?</label>
+      <label><input type="checkbox" class="mr-2" /> Yes</label>
+      <label><input type="checkbox" class="mr-2" /> No</label>
+    </div>
+
+  </form>
+</div>
+{/*  */}
+<div className="pt-[25px] flex justify-center">
+  <div className="bg-[#eeeeee] p-8 rounded-lg  border border-gray-300 w-full max-w-3xl">
+    <form>
+      <h2 className="text-lg font-semibold mb-4 text-[#435164] uppercase tracking text-[12px] font-sans">Verification</h2>
+      <hr className="border-gray-400 mb-6" />
+
+      <div className="mb-6">
+        <label className="block text-[12px] font-sans font-semibold text-sm mb-1 text-[#435164]">
+          Please enter any two digits with no spaces
+          <span className="text-xs font-bold text-gray-700 ml-1">
+            (Example: <span className="text-red-600">12</span>)
+          </span>
+          <span className="text-red-600 ml-1">*</span>
+        </label>
+        <input
+          type="text"
+          maxLength="2"
+          pattern="\d{2}"
+          required
+          className="w-2/4 p-2 bg-[#ffffff] border h-[40px] border-transparent outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none r"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="1/2 bg-[#cd9933] hover:bg-yellow-700 text-white font-bold uppercase text-sm py-2 px-4 rounded shadow transition duration-200"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+    </div>
+ 
+      </div>
+     </div>
+  );
+};
+
+export default SubmissionForm;

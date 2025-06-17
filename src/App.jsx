@@ -11,6 +11,7 @@ import LetterForms from './Components/LetterForms';
 import ForgotPassword from './Components/ForgotPassword';
 import ResetPassword from './Components/ResetPassword';
 import Admin from './Components/Admin/Admin';
+import SubmissionForm from './Components/SubmissionForm';
 const App = () => {
   return (
     <div>
@@ -26,6 +27,8 @@ const App = () => {
     <Route element={<Aboutus />} path="/about" />
     <Route element={<Contactus />} path="/contact" />
     <Route element={<ForgotPassword />} path="/forgot" />
+    <Route element={<SubmissionForm />} path="/sub" />
+
     <Route path="/reset-password/:token" element={<ResetPassword />} />
 
 
