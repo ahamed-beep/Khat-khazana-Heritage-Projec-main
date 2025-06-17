@@ -12,7 +12,6 @@ import ForgotPassword from './Components/ForgotPassword';
 import ResetPassword from './Components/ResetPassword';
 import Admin from './Components/Admin/Admin';
 import SubmissionForm from './Components/SubmissionForm';
-import EditUser from './Components/Singleuserview';
 import IndianMemoryProject from './Components/Supoort';
 import ProductList from './Components/Poruductlist';
 import ProductAddPage from './Components/Productviewpage';
@@ -50,7 +49,6 @@ const App = () => {
         <Route element={<ProtectedRoute />}>
   <Route path="/user" element={<LetterForms />} />
   <Route path="/admin" element={<Admin />} />
-  <Route path="/admin/edit-user/:id" element={<EditUser />} /> {/* ✅ Corrected path */}
 </Route>
 
         </Routes>
