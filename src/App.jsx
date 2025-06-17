@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router";
 import Navbar from './Components/Navbar';
 import Signup from './Components/Signup';
@@ -12,36 +12,53 @@ import ForgotPassword from './Components/ForgotPassword';
 import ResetPassword from './Components/ResetPassword';
 import Admin from './Components/Admin/Admin';
 import SubmissionForm from './Components/SubmissionForm';
+import UsersList from './Components/UserList';
+import EditUser from './Components/Singleuserview';
+import IndianMemoryProject from './Components/Supoort';
+import ProductList from './Components/Poruductlist';
+import ProductAddPage from './Components/Productviewpage';
+import HathiwalasPage from './Components/Supoort';
+import Gallery from './Components/PhotoGallery';
+import MobileSidebar from './Components/MobileSidebar';
+
 const App = () => {
   return (
     <div>
-      <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
-  <BrowserRouter>
-  <Routes>
-    <Route element={<Navbar />} path="/" />
-    <Route element={<Signup />} path="/sign" />
-    <Route element={<Login />} path="/log" />
-    <Route element={<Aboutus />} path="/about" />
-    <Route element={<Contactus />} path="/contact" />
-    <Route element={<ForgotPassword />} path="/forgot" />
-    <Route element={<SubmissionForm />} path="/sub" />
+      <Toaster position="top-center" reverseOrder={false} />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Navbar />} path="/" />
+          <Route element={<Signup />} path="/sign" />
+          <Route element={<Login />} path="/log" />
+          <Route element={<Aboutus />} path="/about" />
+          <Route element={<Contactus />} path="/contact" />
+          <Route element={<ForgotPassword />} path="/forgot" />
+          <Route element={<SubmissionForm />} path="/sub" />
+          <Route element={<UsersList />} path="/userlist" />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/support" element={<IndianMemoryProject />} />
+          <Route path="/productlist" element={<ProductList/>} />
+          <Route path="/productview" element={<ProductAddPage/>} />
+          <Route path="/photo" element={<Gallery/>} />
+          <Route path="/supp" element={<HathiwalasPage/>} />
+          <Route path="/mob" element={<MobileSidebar/>} />
 
-    <Route path="/reset-password/:token" element={<ResetPassword />} />
 
 
-    <Route element={<ProtectedRoute />}>
-      <Route path="/user" element={<LetterForms />} />
-    </Route>
-      <Route element={<ProtectedRoute />}>
-      <Route path="/admin" element={<Admin />} />
-    </Route>
-  </Routes>
-</BrowserRouter>
+
+
+
+
+        <Route element={<ProtectedRoute />}>
+  <Route path="/user" element={<LetterForms />} />
+  <Route path="/admin" element={<Admin />} />
+  <Route path="/admin/edit-user/:id" element={<EditUser />} /> {/* ✅ Corrected path */}
+</Route>
+
+        </Routes>
+      </BrowserRouter>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

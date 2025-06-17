@@ -58,11 +58,11 @@ const Testimonials = () => {
   return (
     <section className="font-poppins">
       {/* ---------- Hero Image Slider ---------- */}
-     
+      {/* (Slider not shown in code – placeholder) */}
 
       {/* ---------- Testimonials Grid ---------- */}
       <div className="bg-white py-20 px-6 md:px-20">
-        <h3 className="mb-14 text-center text-3xl font-extrabold tracking-wide text-black md:text-4xl">
+        <h3 className="mb-14 text-center text-3xl md:text-4xl font-extrabold tracking-wide text-indigo-700">
           What&nbsp;Our&nbsp;Clients&nbsp;Say
         </h3>
 
@@ -76,11 +76,11 @@ const Testimonials = () => {
                 key={i}
                 className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
-                {/* Avatar */}
+                {/* Avatar with blue background */}
                 <img
                   src={t.image}
                   alt={t.name}
-                  className="h-16 w-16 rounded-full border-4 border-black object-cover"
+                  className="h-16 w-16 rounded-full border-4 border-black object-cover bg-blue-500"
                 />
 
                 {/* Testimonial text */}
@@ -98,7 +98,7 @@ const Testimonials = () => {
                         viewBox="0 0 20 20"
                         fill="currentColor"
                         className={`h-4 w-4 ${
-                          s < rating ? 'text-black' : 'text-gray-300'
+                          s < rating ? 'text-yellow-400' : 'text-gray-300'
                         }`}>
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.1 3.385a1 1 0 00.95.69h3.562c.97 0 1.372 1.24.589 1.81l-2.883 2.095a1 1 0 00-.365 1.118l1.1 3.385c.3.922-.756 1.688-1.54 1.118l-2.883-2.094a1 1 0 00-1.175 0l-2.882 2.094c-.785.57-1.84-.196-1.54-1.118l1.1-3.385a1 1 0 00-.364-1.118L2.85 8.812c-.783-.57-.381-1.81.588-1.81h3.562a1 1 0 00.95-.69l1.1-3.385z" />
                       </svg>

@@ -86,7 +86,7 @@ const AboutUs = () => {
 <Nax/>
 
    
-    <div className="relative mt-16">
+    <div className="relative ">
       {/* Banner */}
       <div className="relative w-full overflow-hidden h-[250px] md:h-[400px]">
         <img

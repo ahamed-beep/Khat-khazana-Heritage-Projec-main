@@ -1,158 +1,216 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router'; // Corrected from 'react-router'
+import React, { useState, useRef } from "react";
 import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from '@headlessui/react';
-import { Bars3Icon } from '@heroicons/react/24/outline';
-import { motion } from 'framer-motion';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from './Redux/user';
-
-const navigation = [
-  { name: 'Home', href: '/', current: true },
-  { name: 'About', href: '/about', current: false },
-  { name: 'Contact', href: '/contact', current: false },
-  { name: 'Subbmission', href: '/sub', current: false },
-
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
+  MagnifyingGlassIcon,
+  XMarkIcon,
+  Bars3Icon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+  HomeIcon,
+} from "@heroicons/react/24/solid";
+import { Link } from "react-router";
+import MobileSidebar from "./MobileSidebar";
 
 const Nax = () => {
-  const handleLogout = () => {
-  dispatch(logout());
-  navigate('/log');  
-};
-const dispatch   = useDispatch();
-const navigate   = useNavigate();
-const isAuth     = useSelector((state) => !!state.user.token); 
+  const [showSearch, setShowSearch] = useState(false);
+  const [lettersHover, setLettersHover] = useState(false);
+  const [nestedDropdown, setNestedDropdown] = useState(null);
+  const hoverTimeout = useRef(null);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [dropdownState, setDropdownState] = useState({});
+
+  const toggleDropdown = (key) => {
+    setDropdownState((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  const navLinks = [
+    { label: "ABOUT US", to: "/about" },
+    { label: "LETTERS", to: "/letters", isDropdown: true },
+    { label: "PHOTO GALLERY", to: "/photo" },
+    { label: "SUBMISSION", to: "/sub" },
+    { label: "SUPPORT", to: "/supp" },
+    { label: "CONTACT US", to: "/contact" },
+  ];
+
+  const lettersDropdownItems = [
+    {
+      label: "BY DECADE (1900–2000)",
+      to: "/letters/decade",
+      children: Array.from({ length: 11 }, (_, i) => {
+        const year = 1900 + i * 10;
+        return {
+          label: `${year}`,
+          to: `/letters/decade/${year}`,
+        };
+      }),
+    },
+    {
+      label: "BY CATEGORY",
+      to: "/letters/category",
+      children: [
+        "LOVE LETTERS",
+        "FAMILY",
+        "WAR/POLITICAL TURMOIL",
+        "TRAVEL",
+        "DAIRYPAGES/NEWSPAGES",
+        "CARDS/POSTCARDS",
+        "MOVIE POSTER",
+        "CALENDERS",
+        "OTHERS",
+        "LETTERS BY FAMOUS PERSONALITIES",
+        "FEATURED LETTERS",
+        "FEATURED PHOTO GRAPHS",
+      ].map((label) => ({
+        label,
+        to: `/letters/category/${label.toLowerCase().replace(/\s|\//g, "-")}`,
+      })),
+    },
+  ];
+
   return (
-    <motion.div
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-    >
-      <Disclosure as="nav" className="fixed top-0 left-0 right-0 z-50 bg-white shadow">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 justify-between items-center">
-            <div className="flex items-center">
-              <img
-                alt="Your Company"
-                src="/Images/logo2.jpeg"
-                className="h-16 w-auto py-2" 
+    <nav className="w-full bg-white px-4 py-3 relative border-b border-gray-300 z-50">
+      <div className="max-w-6xl mx-auto">
+        {/* Mobile Navbar */}
+        <div className="flex justify-between items-center md:hidden">
+          <button onClick={() => setIsSidebarOpen(true)}>
+            <Bars3Icon className="h-6 w-6 text-gray-700" />
+          </button>
+
+          {showSearch ? (
+            <div className="flex items-center gap-2 flex-grow mx-2 bg-white px-2 py-1 border border-gray-300 rounded">
+              <input
+                type="text"
+                autoFocus
+                placeholder="Search..."
+                className="text-sm w-full outline-none bg-white"
               />
+              <button onClick={() => setShowSearch(false)}>
+                <XMarkIcon className="h-5 w-5 text-gray-700" />
+              </button>
             </div>
-
-            <div className="hidden sm:flex space-x-4">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={classNames(
-                    item.current
-                      ? 'bg-black text-white'
-                      : 'text-black hover:bg-gray-200 hover:text-black transition duration-300',
-                    'rounded-md px-3 py-2 text-sm font-medium'
-                  )}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <div className="sm:hidden">
-                <DisclosureButton className="inline-flex items-center justify-center p-2 rounded-md text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black">
-                  <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                </DisclosureButton>
-              </div>
-
-              <Menu as="div" className="relative">
-                <MenuButton className="flex items-center text-sm focus:outline-none">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    className="h-7 w-7 text-black"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </MenuButton>
-                <MenuItems className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
-               <MenuItem>
-  {({ active }) =>
-    isAuth ? (
-      /* ---- SIGN-OUT when logged in ---- */
-      <button
-        onClick={handleLogout}
-        className={`block w-full text-left px-4 py-2 text-sm ${
-          active ? 'bg-gray-200' : 'text-black'
-        }`}
-      >
-        Sign Out
-      </button>
-    ) : (
-      /* ---- SIGN-IN when not logged in ---- */
-      <Link
-        to="/sign"
-        className={`block px-4 py-2 text-sm ${
-          active ? 'bg-gray-200' : 'text-black'
-        }`}
-      >
-        Sign In
-      </Link>
-    )
-  }
-</MenuItem>
-
-                  <MenuItem>
-                    {({ active }) => (
-                      <Link
-                        to="/admin"
-                        className={`block px-4 py-2 text-sm ${active ? 'bg-gray-200' : 'text-black'}`}
-                      >
-                        Admin
-                      </Link>
-                    )}
-                  </MenuItem>
-               
-                </MenuItems>
-              </Menu>
-            </div>
-          </div>
+          ) : (
+            <button onClick={() => setShowSearch(true)}>
+              <MagnifyingGlassIcon className="h-6 w-6 text-gray-700" />
+            </button>
+          )}
         </div>
 
-        <DisclosurePanel className="sm:hidden">
-          <div className="space-y-1 px-2 pt-2 pb-3">
-            {navigation.map((item) => (
-              <DisclosureButton
-                key={item.name}
-                as={Link}
-                to={item.href}
-                className={classNames(
-                  item.current ? 'bg-black text-white' : 'text-black hover:bg-gray-200',
-                  'block rounded-md px-3 py-2 text-base font-medium'
-                )}
-              >
-                {item.name}
-              </DisclosureButton>
-            ))}
-          </div>
-        </DisclosurePanel>
-      </Disclosure>
-    </motion.div>
+        {/* Desktop Navbar */}
+        <div className="hidden md:flex flex-col items-center">
+          <div className="h-[1px] bg-gray-300 w-full mb-2" />
+
+          {showSearch ? (
+            <div className="flex items-center gap-2 w-full bg-white px-3 py-1 border border-gray-300 rounded">
+              <input
+                type="text"
+                autoFocus
+                placeholder="Type to search..."
+                className="text-sm w-full outline-none bg-white"
+              />
+              <button onClick={() => setShowSearch(false)}>
+                <XMarkIcon className="h-5 w-5 text-gray-700" />
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center justify-between gap-4 w-full flex-wrap">
+              <Link to="/">
+                <HomeIcon className="h-5 w-5 text-gray-700" />
+              </Link>
+
+              {navLinks.map((link) =>
+                link.isDropdown ? (
+                  <div
+                    key={link.label}
+                    className="relative"
+                    onMouseEnter={() => {
+                      clearTimeout(hoverTimeout.current);
+                      setLettersHover(true);
+                    }}
+                    onMouseLeave={() => {
+                      hoverTimeout.current = setTimeout(() => {
+                        setLettersHover(false);
+                        setNestedDropdown(null);
+                      }, 300);
+                    }}
+                  >
+                    <button className="flex items-center text-sm text-gray-800 hover:text-black gap-1">
+                      {link.label}
+                      <ChevronDownIcon
+                        className={`h-4 w-4 transform transition-transform duration-200 ${
+                          lettersHover ? "rotate-180" : "rotate-0"
+                        }`}
+                      />
+                    </button>
+
+                    {lettersHover && (
+                      <div className="absolute top-full left-0 bg-white shadow-lg mt-1 border rounded w-56 z-30">
+                        {lettersDropdownItems.map((item) => (
+                          <div
+                            key={item.label}
+                            onMouseEnter={() => setNestedDropdown(item.label)}
+                            onMouseLeave={() => setNestedDropdown(null)}
+                            className="relative group"
+                          >
+                            <Link
+                              to={item.to}
+                              className="flex justify-between items-center px-4 py-2 text-sm hover:bg-gray-100"
+                            >
+                              {item.label}
+                              {item.children && (
+                                <ChevronRightIcon className="h-4 w-4" />
+                              )}
+                            </Link>
+                            {item.children &&
+                              nestedDropdown === item.label && (
+                                <div className="absolute top-0 left-full bg-white shadow-lg border rounded w-56 z-40">
+                                  {item.children.map((child) => (
+                                    <Link
+                                      key={child.label}
+                                      to={child.to}
+                                      className="block px-4 py-2 text-sm hover:bg-gray-100"
+                                    >
+                                      {child.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={link.label}
+                    to={link.to}
+                    className="text-sm text-gray-800 hover:text-black"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
+
+              <button onClick={() => setShowSearch(true)}>
+                <MagnifyingGlassIcon className="h-5 w-5 text-gray-700" />
+              </button>
+            </div>
+          )}
+
+          <div className="h-[1px] bg-gray-300 w-full mt-2" />
+        </div>
+      </div>
+
+      {/* Mobile Sidebar */}
+      <MobileSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        dropdownState={dropdownState}
+        toggleDropdown={toggleDropdown}
+      />
+    </nav>
   );
 };
 
