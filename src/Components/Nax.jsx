@@ -15,7 +15,6 @@ const Nax = () => {
   const [lettersHover, setLettersHover] = useState(false);
   const [nestedDropdown, setNestedDropdown] = useState(null);
   const hoverTimeout = useRef(null);
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [dropdownState, setDropdownState] = useState({});
 
@@ -124,7 +123,7 @@ const Nax = () => {
                 link.isDropdown ? (
                   <div
                     key={link.label}
-                    className="relative"
+                    className="relative group"
                     onMouseEnter={() => {
                       clearTimeout(hoverTimeout.current);
                       setLettersHover(true);
@@ -136,7 +135,7 @@ const Nax = () => {
                       }, 300);
                     }}
                   >
-                    <button className="flex items-center text-sm text-gray-800 hover:text-black gap-1">
+                    <button className="flex items-center text-sm text-gray-600  hover:text-black gap-1">
                       {link.label}
                       <ChevronDownIcon
                         className={`h-4 w-4 transform transition-transform duration-200 ${
@@ -145,8 +144,9 @@ const Nax = () => {
                       />
                     </button>
 
+                    {/* Main Dropdown */}
                     {lettersHover && (
-                      <div className="absolute top-full left-0 bg-white shadow-lg mt-1 border rounded w-56 z-30">
+                      <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg border border-gray-200 rounded-md z-50">
                         {lettersDropdownItems.map((item) => (
                           <div
                             key={item.label}
@@ -156,21 +156,23 @@ const Nax = () => {
                           >
                             <Link
                               to={item.to}
-                              className="flex justify-between items-center px-4 py-2 text-sm hover:bg-gray-100"
+                              className="flex justify-between items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               {item.label}
                               {item.children && (
                                 <ChevronRightIcon className="h-4 w-4" />
                               )}
                             </Link>
+
+                            {/* Nested Dropdown */}
                             {item.children &&
                               nestedDropdown === item.label && (
-                                <div className="absolute top-0 left-full bg-white shadow-lg border rounded w-56 z-40">
+                                <div className="absolute top-0 left-full mt-0 ml-1 w-56 bg-white shadow-lg border border-gray-200 rounded-md z-50">
                                   {item.children.map((child) => (
                                     <Link
                                       key={child.label}
                                       to={child.to}
-                                      className="block px-4 py-2 text-sm hover:bg-gray-100"
+                                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     >
                                       {child.label}
                                     </Link>
@@ -186,7 +188,7 @@ const Nax = () => {
                   <Link
                     key={link.label}
                     to={link.to}
-                    className="text-sm text-gray-800 hover:text-black"
+                    className="text-sm text-gray-600 hover:text-black"
                   >
                     {link.label}
                   </Link>
