@@ -215,9 +215,9 @@ const HathiwalasPage = () => {
           personal funds, and your patronage to collect and share stories of the
           subcontinent far and wide. Please consider offering us your patronage in
           any amount you like.{" "}
-          <span className="font-semibold text-yellow-900 cursor-pointer underline">
-            Join our Circle of Patrons
-          </span>
+          <Link to='/productlist' className="font-semibold text-yellow-900 cursor-pointer underline">
+            Please Consider Purchasing Our Merchandise
+          </Link>
         </p>
       </div>
 
