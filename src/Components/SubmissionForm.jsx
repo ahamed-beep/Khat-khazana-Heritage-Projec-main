@@ -3,6 +3,8 @@ import Nax from './Nax';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postsubmissiondata } from './Redux/submission';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SubmissionForm = () => {
   const dispatch = useDispatch();
@@ -26,7 +28,8 @@ const SubmissionForm = () => {
   const [imagebefore, setImagebefore] = useState(false);
   const [termsandcondition, setTermsandcondition] = useState(false);
   const [category, setCategory] = useState('');
-
+  const [title, settitle] = useState('');
+  
   const handleNameChange = (e) => setName(e.target.value);
   const handleLocationChange = (e) => setLocation(e.target.value);
   const handlePhoneChange = (e) => setPhone(e.target.value);
@@ -38,6 +41,7 @@ const SubmissionForm = () => {
   const handleDateImageChange = (e) => setDateimage(e.target.value);
   const handlePlaceImageChange = (e) => setPlaceimage(e.target.value);
   const handlePhotographCaptainChange = (e) => setPhotographcaptain(e.target.value);
+  const titlehandler = (e) => settitle(e.target.value);
   const handleStoryChange = (e) => setStory(e.target.value);
   const handleNarrativeChange = (e) => setNarrative(e.target.value);
   const handleImageAddedChange = (e) => setImageadded(e.target.checked);
@@ -60,6 +64,18 @@ const SubmissionForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // Validate terms and conditions
+    if (!termsandcondition) {
+      toast.error('Please accept the terms and conditions to submit the form');
+      return;
+    }
+
+    // Validate image is from before 1992
+    if (!imagebefore) {
+      toast.error('The image must be from before the year 1992');
+      return;
+    }
+
     // Prepare the submission data object
     const submissionData = {
       name,
@@ -80,11 +96,15 @@ const SubmissionForm = () => {
       imageadded,
       imagebefore,
       termsandcondition,
-      category
+      category,
+      title
     };
 
     // Dispatch the Redux action
     dispatch(postsubmissiondata(submissionData));
+    
+    // Show success message
+    toast.success('Form submitted successfully!');
   };
 
   return (
@@ -235,20 +255,45 @@ const SubmissionForm = () => {
                   className="w-2/4 p-2 bg-[#ffffff] my-3 h-[40px] border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none"
                 />
               </div>
+                   <div>
+                <label className="block text-[12px] font-sans font-semibold">Full Title of Letter/Photograph *</label>
+                <input 
+                  type="text" 
+                  required 
+                  value={title}
+                  onChange={titlehandler}
+                  className="w-2/4 p-2 bg-[#ffffff] border my-3 border-transparent h-[40px] focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none"
+                />
+              </div>
 
               {/* Permission Checkbox */}
-              <div>
-                <label className="block text-[12px] font-sans mb-2">Are you the guardian/owner of the image? *</label>
-                <label className="inline-flex items-center px-3">
-                  <input 
-                    type="checkbox" 
-                    checked={guadianowner}
-                    onChange={handleGuadianOwnerChange}
-                    className="mr-2" 
-                  />
-                  Yes
-                </label>
-              </div>
+            <div>
+  <label className="block text-[12px] font-sans mb-2">Are you the guardian/owner of the image? *</label>
+  <div className="flex gap-4">
+    <label className="inline-flex items-center">
+      <input
+        type="radio"
+        name="guadianowner"
+        value="true"
+        checked={guadianowner === true}
+        onChange={() => setGuadianowner(true)}
+        className="mr-2"
+      />
+      Yes
+    </label>
+    <label className="inline-flex items-center">
+      <input
+        type="radio"
+        name="guadianowner"
+        value="false"
+        checked={guadianowner === false}
+        onChange={() => setGuadianowner(false)}
+        className="mr-2"
+      />
+      No
+    </label>
+  </div>
+</div>
 
               {/* Instructions */}
               <div className="mb-6 p-4 rounded shadow">
@@ -460,7 +505,7 @@ const SubmissionForm = () => {
                   </label>
                 </div>
                 
-                <label className="block font-semibold text-[12px] font-sans">Have you read the Terms of Submissions?</label>
+                <label className="block font-semibold text-[12px] font-sans">Have you read the Terms of Submissions? *</label>
                 <div>
                   <label>
                     <input 
@@ -487,10 +532,20 @@ const SubmissionForm = () => {
 
               <button
                 type="submit"
-                className="1/2 bg-[#cd9933] hover:bg-yellow-700 text-white font-bold uppercase text-sm py-2 px-4 rounded shadow transition duration-200"
+                disabled={!termsandcondition || !imagebefore}
+                className={`w-1/2 bg-[#cd9933] hover:bg-yellow-700 text-white font-bold uppercase text-sm py-2 px-4 rounded shadow transition duration-200 ${
+                  !termsandcondition || !imagebefore ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
                 Submit
               </button>
+              
+              {(!termsandcondition || !imagebefore) && (
+                <p className="text-red-500 text-sm mt-2">
+                  {!termsandcondition && "Please accept the terms and conditions to submit the form. "}
+                  {!imagebefore && "The image must be from before the year 1992."}
+                </p>
+              )}
             </form>
           </div>
         </div>

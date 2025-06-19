@@ -20,6 +20,7 @@ import Gallery from './Components/PhotoGallery';
 import MobileSidebar from './Components/MobileSidebar';
 import AddToCart from './Components/AddToCart';
 import Checkout from './Components/Checkout';
+import SubmissionView from './Components/Admin/Submissionviewpage';
 
 const App = () => {
   return (
@@ -42,7 +43,9 @@ const App = () => {
           <Route path="/supp" element={<HathiwalasPage/>} />
           <Route path="/mob" element={<MobileSidebar/>} />
               <Route path="/cart" element={<AddToCart />} />  
-          <Route path="/checkout" element={<Checkout />} />  {/* ✅ STEP 2: Checkout Route */}
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/submission/view/:id" element={<SubmissionView />} />
+
 
 
 

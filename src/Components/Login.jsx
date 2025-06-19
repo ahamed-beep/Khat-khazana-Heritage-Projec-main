@@ -41,8 +41,11 @@ function Login() {
   };
 
   return (
+    <div>
+          <Nax />
+   
     <div className="flex justify-center items-center min-h-screen bg-white">
-      <Nax />
+  
       <div className="w-full max-w-md p-8 bg-white border border-gray-200 rounded-xl shadow-2xl">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login</h2>
 
@@ -131,6 +134,7 @@ function Login() {
         </p>
       </div>
     </div>
+     </div>
   );
 }
 

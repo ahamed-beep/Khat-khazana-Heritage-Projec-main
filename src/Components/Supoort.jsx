@@ -55,22 +55,27 @@ const HathiwalasPage = () => {
         </p>
         <hr className="mt-1 border-t-2 border-black w-2/3" />
 
-        <div className="my-4">
-          <img
-            src="https://thumbs.dreamstime.com/b/exploration-slavic-symbol-amidst-ancient-patterns-mystical-designs-generative-ai-captivating-stylization-captures-384001996.jpg" 
-            alt="Support"
-            className="w-full object-contain"
-          />
-        </div>
+       <div className="my-4 hover:bg-gray-800 transition-colors duration-300">
+            <img
+    src="https://thumbs.dreamstime.com/b/exploration-slavic-symbol-amidst-ancient-patterns-mystical-designs-generative-ai-captivating-stylization-captures-384001996.jpg" 
+    alt="Support"
+    className="w-full object-contain"
+        />
+           </div>
+
 
         <p className="text-sm text-gray-800">
           For 14 years, Indian Memory Project has remained ad-free and relies on
           personal funds, and your patronage to collect and share stories of the
           subcontinent far and wide. Please consider offering us your patronage in
           any amount you like.{" "}
-          <Link to='/productlist' className="font-semibold text-yellow-900 cursor-pointer underline">
-            Please Consider Purchasing Our Merchandise
-          </Link>
+          <Link
+  to="/productlist"
+  className="font-semibold text-yellow-900 hover:[color:#E4DF4C] underline cursor-pointer"
+>
+  Please Consider Purchasing Our Merchandise
+</Link>
+
         </p>
       </div>
 
@@ -80,13 +85,13 @@ const HathiwalasPage = () => {
           Directory of Archives
         </p>
 
-        <div className="my-4">
-          <img
-            src="https://thumbs.dreamstime.com/b/symbolic-representation-slavic-heritage-artistic-design-craftsmanship-generative-ai-ornate-stylization-symbol-384002094.jpg" 
-            alt="Directory"
-            className="w-full object-contain"
-          />
-        </div>
+       <div className="my-4 overflow-hidden">
+               <img
+                  src="https://thumbs.dreamstime.com/b/symbolic-representation-slavic-heritage-artistic-design-craftsmanship-generative-ai-ornate-stylization-symbol-384002094.jpg" 
+              alt="Directory"
+              className="w-full object-contain transition-transform duration-300 hover:scale-105"
+              />
+                </div>
 
         <p className="text-sm text-gray-800">
           An updateable list of public and private archives, and museums around the
@@ -99,14 +104,22 @@ const HathiwalasPage = () => {
       <div className="bg-white flex items-center mt-10 justify-center">
         <div className="max-w-3xl w-full overflow-hidden bg-white">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-yellow-800 mb-4 text-left">
-              The Forgotten Hathiwalas Of Surat
-            </h1>
-            <img
-              src="https://c8.alamy.com/comp/J3T2KD/the-kashmiri-people-in-the-early-1900s-were-part-of-the-rich-cultural-J3T2KD.jpg"
-              alt="Vintage family photograph circa 1900"
-              className="mx-auto w-full h-full"
-            />
+           <div className="group">
+              <h1
+              className="text-3xl font-bold text-yellow-800 mb-4 text-left transition-colors duration-300 group-hover:text-[color:var(--hover-yellow)]"
+            style={{ '--hover-yellow': '#E4DF4C' }}
+            >
+                  The Forgotten Hathiwalas Of Surat
+             </h1>
+                  </div>
+
+          <img
+            src="https://c8.alamy.com/comp/J3T2KD/the-kashmiri-people-in-the-early-1900s-were-part-of-the-rich-cultural-J3T2KD.jpg"
+             alt="Vintage family photograph circa 1900"
+             className="mx-auto w-full h-full transition duration-300 hover:brightness-75"
+               />
+
+
           </div>
            <div className="max-w-3xl w-full overflow-hidden bg-white ">
       
@@ -124,14 +137,21 @@ const HathiwalasPage = () => {
       <div className="bg-white flex items-center mt-10 justify-center">
         <div className="max-w-3xl w-full overflow-hidden bg-white">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-yellow-800 mb-4 text-left">
-              “I Am A Refugee In Love!”
-            </h1>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Old_heritage_in_lahore_-_Lahore_Fort.jpg/1200px-Old_heritage_in_lahore_-_Lahore_Fort.jpg"
+            <div className="group">
+                  <h1
+               className="text-3xl font-bold text-yellow-800 mb-4 text-left transition-colors duration-300 group-hover:text-[color:var(--hover-yellow)]"
+                style={{ '--hover-yellow': '#E4DF4C' }}
+                  >
+                   “I Am A Refugee In Love!”
+                  </h1>
+                     </div>
+
+           <img
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Old_heritage_in_lahore_-_Lahore_Fort.jpg/1200px-Old_heritage_in_lahore_-_Lahore_Fort.jpg"
               alt="I Am A Refugee In Love"
-              className="mx-auto w-full h-full"
-            />
+              className="mx-auto w-full h-full transition duration-300 hover:brightness-75"
+                />
+
           </div>
         </div>
       </div>
@@ -215,9 +235,12 @@ const HathiwalasPage = () => {
           personal funds, and your patronage to collect and share stories of the
           subcontinent far and wide. Please consider offering us your patronage in
           any amount you like.{" "}
-          <Link to='/productlist' className="font-semibold text-yellow-900 cursor-pointer underline">
-            Please Consider Purchasing Our Merchandise
-          </Link>
+                    <Link
+  to="/productlist"
+  className="font-semibold text-yellow-900 hover:[color:#E4DF4C] underline cursor-pointer"
+>
+  Please Consider Purchasing Our Merchandise
+</Link>
         </p>
       </div>
 
