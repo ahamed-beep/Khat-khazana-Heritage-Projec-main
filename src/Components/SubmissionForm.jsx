@@ -7,7 +7,6 @@ import { postsubmissiondata } from './Redux/submission';
 const SubmissionForm = () => {
   const dispatch = useDispatch();
   
-  // Individual state variables for each field
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [phone, setPhone] = useState('');
@@ -26,8 +25,8 @@ const SubmissionForm = () => {
   const [imageadded, setImageadded] = useState(false);
   const [imagebefore, setImagebefore] = useState(false);
   const [termsandcondition, setTermsandcondition] = useState(false);
+  const [category, setCategory] = useState('');
 
-  // Individual handlers for each field
   const handleNameChange = (e) => setName(e.target.value);
   const handleLocationChange = (e) => setLocation(e.target.value);
   const handlePhoneChange = (e) => setPhone(e.target.value);
@@ -35,7 +34,6 @@ const SubmissionForm = () => {
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handleSocialMediaChange = (e) => setSocialmedia(e.target.value);
   const handleGuadianOwnerChange = (e) => setGuadianowner(e.target.checked);
-  const handleAttachmentChange = (e) => setAttachment(e.target.value);
   const handleOtherSpecifyChange = (e) => setOtherspecify(e.target.value);
   const handleDateImageChange = (e) => setDateimage(e.target.value);
   const handlePlaceImageChange = (e) => setPlaceimage(e.target.value);
@@ -81,7 +79,8 @@ const SubmissionForm = () => {
       narrative,
       imageadded,
       imagebefore,
-      termsandcondition
+      termsandcondition,
+      category
     };
 
     // Dispatch the Redux action
@@ -91,7 +90,7 @@ const SubmissionForm = () => {
   return (
     <div>
       <Nax />
-      <div className="flex mt-18 flex-col lg:flex-row px-4 py-8 max-w-screen-xl flex justify-around mx-auto">
+      <div className=" mt-18 flex-col lg:flex-row px-4 py-8 max-w-screen-xl flex justify-around mx-auto">
       
         {/* Left Column */}
         <div className="lg:w-2/6 w-full px-4 mb-8 lg:mb-0">
@@ -267,17 +266,44 @@ const SubmissionForm = () => {
                 </ol>
               </div>
 
-              {/* Image Type */}
               <div>
-                <label className="block font-semibold text-[12px] font-sans">Your visual attachment is a *</label>
+                <label className="block font-semibold text-[12px] font-sans">
+                  Your visual attachment is a *
+                </label>
                 <div className="flex flex-col gap-2 mt-2">
-                  <label><input type="checkbox" className="mr-2" /> Photograph</label>
-                  <label><input type="checkbox" className="mr-2" /> Letter</label>
-                  <label><input type="checkbox" className="mr-2" /> Other</label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="attachment"
+                      className="mr-2"
+                      checked={attachment === 'Photograph'}
+                      onChange={() => setAttachment('Photograph')}
+                    />
+                    Photograph
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="attachment"
+                      className="mr-2"
+                      checked={attachment === 'Letter'}
+                      onChange={() => setAttachment('Letter')}
+                    />
+                    Letter
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="attachment"
+                      className="mr-2"
+                      checked={attachment === 'Other'}
+                      onChange={() => setAttachment('Other')}
+                    />
+                    Other
+                  </label>
                 </div>
               </div>
 
-              {/* Other Source */}
               <div>
                 <label className="block font-semibold text-[12px] font-sans">If Other, please specify</label>
                 <input 
@@ -303,20 +329,43 @@ const SubmissionForm = () => {
               </div>
 
               {/* Date */}
-              <div>
-                <label className="block font-semibold text-[12px] font-sans">Date of visual material (if known)</label>
-                <div className="flex gap-4">
-                  <input 
-                    type="text" 
-                    placeholder="dd/mm/yyyy" 
-                    value={dateimage}
-                    onChange={handleDateImageChange}
-                    className="w-2/4 p-2 bg-[#ffffff] border my-3 h-[40px] border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none"
-                  />
-                </div>
+              <div className="relative mb-4 overflow-visible">
+                <label className="block font-semibold text-[12px] font-sans mb-1">
+                  Which year this letter is from?
+                </label>
+                <input
+                  type="date"
+                  value={dateimage}
+                  onChange={handleDateImageChange}
+                  className="w-full max-w-xs p-2 bg-white border border-gray-300 h-[40px] text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 rounded shadow-sm"
+                  min="1900-01-01"
+                  max="2000-12-31"
+                />
               </div>
 
-              {/* City */}
+              <div className="relative mb-4 overflow-visible">
+                <label className="block font-semibold text-[12px] font-sans mb-1">
+                  Which category does it lie in?
+                </label>
+                <select
+                  value={category} 
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="w-full max-w-xs p-2 bg-white border border-gray-300 h-[40px] text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 rounded shadow-sm"
+                >
+                  <option value="">Select category</option>
+                  <option value="love-letters">LOVE LETTERS</option>
+                  <option value="family">FAMILY</option>
+                  <option value="war-political-turmoil">WAR/POLITICAL TURMOIL</option>
+                  <option value="travel">TRAVEL</option>
+                  <option value="dairypages-newspaper">DAIRYPAGES/NEWSPAPER</option>
+                  <option value="cards-postcards">CARDS/POSTCARDS</option>
+                  <option value="moviecards">MOVIECARDS</option>
+                  <option value="calenders">CALENDERS</option>
+                  <option value="others">OTHERS</option>
+                  <option value="letter-by-famous-personalities">LETTER BY FAMOUS PERSONALITIES</option>
+                </select>
+              </div>
+
               <div>
                 <label className="block font-semibold text-[12px] font-sans">Place the image was taken *</label>
                 <input 
@@ -328,7 +377,6 @@ const SubmissionForm = () => {
                 />
               </div>
 
-              {/* Photographer */}
               <div>
                 <label className="block font-semibold text-[12px] font-sans">Photograph Caption *</label>
                 <input 
@@ -341,7 +389,6 @@ const SubmissionForm = () => {
                 <p style={{fontSize:'9px'}}>Name the people in the photograph.</p>
               </div>
 
-              {/* Narrative */}
               <div>
                 <h1 className='font-semibold text-[12px] font-sans'>PASTE A NARRATIVE ABOUT THE IMAGE BELOW</h1>
                 <p className='py-4' style={{fontSize:'9px'}}>Short or Long Essay or a Paragraph about this image.</p>
@@ -354,7 +401,6 @@ const SubmissionForm = () => {
                 ></textarea>
               </div>
 
-              {/* Story */}
               <div>
                 <label className="block font-semibold text-[12px] font-sans my-3">Story</label>
                 <textarea 
@@ -365,51 +411,86 @@ const SubmissionForm = () => {
                 ></textarea>
               </div>
 
-              {/* Confirmation */}
               <div className="flex flex-col gap-2">
                 <label className="block font-semibold text-[12px] font-sans">Have you uploaded an image?</label>
-                <label><input type="checkbox" checked={imageadded} onChange={handleImageAddedChange} className="mr-2" /> Yes</label>
-                <label className="block font-semibold text-[12px] font-sans">Have you added a Narrative?</label>
-                <label><input type="checkbox" className="mr-2" /> Yes</label>
+                <div>
+                  <label>
+                    <input 
+                      type="radio" 
+                      name="imageadded" 
+                      checked={imageadded === true} 
+                      onChange={() => setImageadded(true)} 
+                      className="mr-2" 
+                    /> 
+                    Yes
+                  </label>
+                  <label className="ml-4">
+                    <input 
+                      type="radio" 
+                      name="imageadded" 
+                      checked={imageadded === false} 
+                      onChange={() => setImageadded(false)} 
+                      className="mr-2" 
+                    /> 
+                    No
+                  </label>
+                </div>
+                
                 <label className="block font-semibold text-[12px] font-sans">Is the image from before the Year 1992? *</label>
-                <label><input type="checkbox" checked={imagebefore} onChange={handleImageBeforeChange} className="mr-2" /> Yes</label>
-                <label><input type="checkbox" className="mr-2" /> No</label>
+                <div>
+                  <label>
+                    <input 
+                      type="radio" 
+                      name="imagebefore" 
+                      checked={imagebefore === true} 
+                      onChange={() => setImagebefore(true)} 
+                      className="mr-2" 
+                    /> 
+                    Yes
+                  </label>
+                  <label className="ml-4">
+                    <input 
+                      type="radio" 
+                      name="imagebefore" 
+                      checked={imagebefore === false} 
+                      onChange={() => setImagebefore(false)} 
+                      className="mr-2" 
+                    /> 
+                    No
+                  </label>
+                </div>
+                
                 <label className="block font-semibold text-[12px] font-sans">Have you read the Terms of Submissions?</label>
-                <label><input type="checkbox" checked={termsandcondition} onChange={handleTermsAndConditionChange} className="mr-2" /> Yes</label>
-                <label><input type="checkbox" className="mr-2" /> No</label>
-              </div>
-
-              {/* Verification */}
-              <div className="pt-[25px] flex justify-center">
-                <div className="bg-[#eeeeee] p-8 rounded-lg border border-gray-300 w-full max-w-3xl">
-                  <h2 className="text-lg font-semibold mb-4 text-[#435164] uppercase tracking text-[12px] font-sans">Verification</h2>
-                  <hr className="border-gray-400 mb-6" />
-
-                  <div className="mb-6">
-                    <label className="block text-[12px] font-sans font-semibold text-sm mb-1 text-[#435164]">
-                      Please enter any two digits with no spaces
-                      <span className="text-xs font-bold text-gray-700 ml-1">
-                        (Example: <span className="text-red-600">12</span>)
-                      </span>
-                      <span className="text-red-600 ml-1">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      maxLength="2"
-                      pattern="\d{2}"
-                      required
-                      className="w-2/4 p-2 bg-[#ffffff] border h-[40px] border-transparent outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="1/2 bg-[#cd9933] hover:bg-yellow-700 text-white font-bold uppercase text-sm py-2 px-4 rounded shadow transition duration-200"
-                  >
-                    Submit
-                  </button>
+                <div>
+                  <label>
+                    <input 
+                      type="radio" 
+                      name="termsandcondition" 
+                      checked={termsandcondition === true} 
+                      onChange={() => setTermsandcondition(true)} 
+                      className="mr-2" 
+                    /> 
+                    Yes
+                  </label>
+                  <label className="ml-4">
+                    <input 
+                      type="radio" 
+                      name="termsandcondition" 
+                      checked={termsandcondition === false} 
+                      onChange={() => setTermsandcondition(false)} 
+                      className="mr-2" 
+                    /> 
+                    No
+                  </label>
                 </div>
               </div>
+
+              <button
+                type="submit"
+                className="1/2 bg-[#cd9933] hover:bg-yellow-700 text-white font-bold uppercase text-sm py-2 px-4 rounded shadow transition duration-200"
+              >
+                Submit
+              </button>
             </form>
           </div>
         </div>

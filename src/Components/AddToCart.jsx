@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import Nax from "./Nax";
 
 const AddToCart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -59,6 +60,8 @@ const AddToCart = () => {
   };
 
   return (
+    <div>
+<Nax/>
     <div className="min-h-screen px-4 py-10 bg-white text-gray-800">
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-between items-center mb-10">
@@ -205,6 +208,7 @@ const AddToCart = () => {
         )}
       </div>
     </div>
+        </div>
   );
 };
 

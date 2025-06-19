@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { ShoppingCartIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import Nax from "./Nax";
 
 const thumbnails = [
   "https://books.lettersofnote.com/cdn/shop/products/hem1_1024x1024@2x.jpg?v=1676471014",
@@ -73,6 +74,8 @@ const Productviewpage = () => {
   };
 
   return (
+    <div>
+<Nax/>
     <div className="relative font-sans bg-white text-black min-h-screen px-4 py-10 md:px-20 md:py-16">
 
       {/* Fixed Corner Navbar */}
@@ -198,6 +201,7 @@ const Productviewpage = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

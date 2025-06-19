@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosinstacne from "../Connection/Api";
 export const postsubmissiondata = createAsyncThunk(
     "postalldata",
-    async()=>{
-        const responce = await axiosinstacne.post('/sub')
-        console.log(responce.data);
-        return responce.data
-    }
+ async (submissionData) => {
+    const response = await axiosinstacne.post('/sub', submissionData)
+    console.log(response.data)
+    return response.data
+}
 )
 const submissionslice = createSlice({
     name:"submisiions",
