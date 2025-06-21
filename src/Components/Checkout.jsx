@@ -19,7 +19,7 @@ const Checkout = () => {
   return (
     <div>
 
-   <Nax/>
+  <Nax/>
     <div className="min-h-screen bg-white p-6 md:p-10 text-black">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row rounded-2xl overflow-hidden relative">
         {/* Left Panel (Form) */}
@@ -174,7 +174,7 @@ const Checkout = () => {
         </div>
       </div>
     </div>
-     </div>
+      </div>
   );
 };
 

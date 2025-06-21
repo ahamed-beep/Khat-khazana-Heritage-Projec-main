@@ -185,6 +185,12 @@ export default function AdminDashboard() {
                   <dd className="text-gray-800">{entry.dateimage}</dd>
                   <dt className="font-medium text-gray-600">Place</dt>
                   <dd className="text-gray-800">{entry.placeimage}</dd>
+                      <dt className="font-medium text-gray-600">Featured Letter</dt>
+                  <dd className="text-gray-800">{entry.admindescription}</dd>
+                            <dt className="font-medium text-gray-600">Admin description</dt>
+                  <dd className="text-gray-800">{entry.admindescription}</dd>
+                            <dt className="font-medium text-gray-600">Admin description</dt>
+                  <dd className="text-gray-800">{entry.admindescription}</dd>
                   <dt className="font-medium text-gray-600">Photograph Caption</dt>
                   <dd className="text-gray-800">{entry.photographcaptain}</dd>
                   <dt className="font-medium text-gray-600">Category</dt>

@@ -10,9 +10,10 @@ const SubmissionView = () => {
 
   const [formData, setFormData] = useState({
     title: "",
-    story: "",
+    admindescription: "",
     status: "",
-    
+    featuredletter: "",
+    featuredphotograph: "",
   });
 
   useEffect(() => {
@@ -23,14 +24,32 @@ const SubmissionView = () => {
     if (singlesubmission) {
       setFormData({
         title: singlesubmission.title || "",
-        story: singlesubmission.story || "",
+        admindescription: singlesubmission.admindescription || "",
         status: singlesubmission.status || "",
+        featuredletter: singlesubmission.featuredletter || "False",
+        featuredphotograph: singlesubmission.featuredphotograph || "False",
       });
     }
   }, [singlesubmission]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setFormData((prev) => {
+      let updatedData = { ...prev, [name]: value };
+      // Auto-update status if featured flags change
+      if (name === "featuredphotograph" || name === "featuredletter") {
+        const photograph = name === "featuredphotograph" ? value : prev.featuredphotograph;
+        const letter = name === "featuredletter" ? value : prev.featuredletter;
+
+        if (photograph === "True" || letter === "True") {
+          updatedData.status = "True";
+        } else {
+          updatedData.status = "False";
+        }
+      }
+      return updatedData;
+    });
   };
 
   const handleUpdate = () => {
@@ -66,14 +85,40 @@ const SubmissionView = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium">Story</label>
+          <label className="block text-sm font-medium">Description</label>
           <textarea
-            name="story"
+            name="admindescription"
             rows={4}
-            value={formData.story}
+            value={formData.admindescription}
             onChange={handleChange}
             className="w-full border rounded px-3 py-2"
           />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium">Featured Photograph</label>
+          <select
+            name="featuredphotograph"
+            value={formData.featuredphotograph}
+            onChange={handleChange}
+            className="w-full border rounded px-3 py-2"
+          >
+            <option value="False">False</option>
+            <option value="True">True</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium">Featured Letter</label>
+          <select
+            name="featuredletter"
+            value={formData.featuredletter}
+            onChange={handleChange}
+            className="w-full border rounded px-3 py-2"
+          >
+            <option value="False">False</option>
+            <option value="True">True</option>
+          </select>
         </div>
 
         <div>
@@ -84,7 +129,6 @@ const SubmissionView = () => {
             onChange={handleChange}
             className="w-full border rounded px-3 py-2"
           >
-            <option value="">Select Status</option>
             <option value="Pending">Pending</option>
             <option value="Approved">Approved</option>
             <option value="Rejected">Rejected</option>

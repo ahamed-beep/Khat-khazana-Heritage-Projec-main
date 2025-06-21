@@ -34,39 +34,38 @@ const Nax = () => {
     { label: "CONTACT US", to: "/contact" },
   ];
 
-  const lettersDropdownItems = [
-    {
-      label: "BY DECADE (1900–2000)",
-      to: "/letters/decade",
-      children: Array.from({ length: 11 }, (_, i) => {
-        const year = 1900 + i * 10;
-        return {
-          label: `${year}`,
-          to: `/letters/decade/${year}`,
-        };
-      }),
-    },
-    {
-      label: "BY CATEGORY",
-      to: "/letters/category",
-      children: [
-        "LOVE LETTERS",
-        "FAMILY",
-        "WAR/POLITICAL TURMOIL",
-        "TRAVEL",
-        "DAIRYPAGES/NEWSPAGES",
-        "CARDS/POSTCARDS",
-        "MOVIE POSTER",
-        "CALENDERS",
-        "OTHERS",
-        "LETTERS BY FAMOUS PERSONALITIES",
-        "FEATURED LETTERS",
-        "FEATURED PHOTO GRAPHS",
-      ].map((label) => ({
-        label,
-        to: `/letters/category/${label.toLowerCase().replace(/\s|\//g, "-")}`,
-      })),
-    },
+  const byDecade = {
+    label: "BY DECADE (1900–2000)",
+    to: "#",
+    children: Array.from({ length: 11 }, (_, i) => {
+      const year = 1900 + i * 10;
+      return {
+        label: `${year}`,
+        to: `/${year}`,
+      };
+    }),
+  };
+
+  const byCategory = {
+    label: "BY CATEGORY",
+    to: "/letters/category",
+    children: [
+      { label: "LOVE LETTERS", to: "/love" },
+      { label: "FAMILY", to: "/family" },
+      { label: "WAR/POLITICAL TURMOIL", to: "/war" },
+      { label: "TRAVEL", to: "/travel" },
+      { label: "DAIRYPAGES/NEWSPAGES", to: "/dairy" },
+      { label: "CARDS/POSTCARDS", to: "/cards" },
+      { label: "MOVIE POSTER", to: "/movie" },
+      { label: "CALENDERS", to: "/calenders" },
+      { label: "OTHERS", to: "/other" },
+      { label: "LETTERS BY FAMOUS PERSONALITIES", to: "/famous" },
+    ],
+  };
+
+  const extraPages = [
+    { label: "FEATURED LETTERS", to: "/featured" },
+    { label: "FEATURED PHOTOGRAPHS", to: "/photographs" },
   ];
 
   return (
@@ -123,7 +122,7 @@ const Nax = () => {
                 link.isDropdown ? (
                   <div
                     key={link.label}
-                    className="relative group"
+                    className="relative"
                     onMouseEnter={() => {
                       clearTimeout(hoverTimeout.current);
                       setLettersHover(true);
@@ -135,7 +134,7 @@ const Nax = () => {
                       }, 300);
                     }}
                   >
-                    <button className="flex items-center text-sm text-gray-600  hover:text-black gap-1">
+                    <button className="flex items-center text-sm text-gray-800 hover:text-black gap-1">
                       {link.label}
                       <ChevronDownIcon
                         className={`h-4 w-4 transform transition-transform duration-200 ${
@@ -144,42 +143,73 @@ const Nax = () => {
                       />
                     </button>
 
-                    {/* Main Dropdown */}
                     {lettersHover && (
-                      <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                        {lettersDropdownItems.map((item) => (
-                          <div
-                            key={item.label}
-                            onMouseEnter={() => setNestedDropdown(item.label)}
-                            onMouseLeave={() => setNestedDropdown(null)}
-                            className="relative group"
+                      <div className="absolute top-full left-0 bg-white shadow-lg mt-1 border rounded w-56 z-30">
+                        {/* BY DECADE */}
+                        <div
+                          onMouseEnter={() => setNestedDropdown(byDecade.label)}
+                          onMouseLeave={() => setNestedDropdown(null)}
+                          className="relative group"
+                        >
+                          <Link
+                            to={byDecade.to}
+                            className="flex justify-between items-center px-4 py-2 text-sm hover:bg-gray-100"
                           >
-                            <Link
-                              to={item.to}
-                              className="flex justify-between items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            >
-                              {item.label}
-                              {item.children && (
-                                <ChevronRightIcon className="h-4 w-4" />
-                              )}
-                            </Link>
+                            {byDecade.label}
+                            <ChevronRightIcon className="h-4 w-4" />
+                          </Link>
+                          {nestedDropdown === byDecade.label && (
+                            <div className="absolute top-0 left-full bg-white shadow-lg border rounded w-56 z-40">
+                              {byDecade.children.map((child) => (
+                                <Link
+                                  key={child.label}
+                                  to={child.to}
+                                  className="block px-4 py-2 text-sm hover:bg-gray-100"
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
 
-                            {/* Nested Dropdown */}
-                            {item.children &&
-                              nestedDropdown === item.label && (
-                                <div className="absolute top-0 left-full mt-0 ml-1 w-56 bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                                  {item.children.map((child) => (
-                                    <Link
-                                      key={child.label}
-                                      to={child.to}
-                                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    >
-                                      {child.label}
-                                    </Link>
-                                  ))}
-                                </div>
-                              )}
-                          </div>
+                        {/* BY CATEGORY */}
+                        <div
+                          onMouseEnter={() => setNestedDropdown(byCategory.label)}
+                          onMouseLeave={() => setNestedDropdown(null)}
+                          className="relative group"
+                        >
+                          <Link
+                            to={byCategory.to}
+                            className="flex justify-between items-center px-4 py-2 text-sm hover:bg-gray-100"
+                          >
+                            {byCategory.label}
+                            <ChevronRightIcon className="h-4 w-4" />
+                          </Link>
+                          {nestedDropdown === byCategory.label && (
+                            <div className="absolute top-0 left-full bg-white shadow-lg border rounded w-56 z-40">
+                              {byCategory.children.map((child) => (
+                                <Link
+                                  key={child.label}
+                                  to={child.to}
+                                  className="block px-4 py-2 text-sm hover:bg-gray-100"
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Extra Pages Outside Dropdown */}
+                        {extraPages.map((item) => (
+                          <Link
+                            key={item.label}
+                            to={item.to}
+                            className="block px-4 py-2 text-sm hover:bg-gray-100 border-t"
+                          >
+                            {item.label}
+                          </Link>
                         ))}
                       </div>
                     )}
@@ -188,7 +218,7 @@ const Nax = () => {
                   <Link
                     key={link.label}
                     to={link.to}
-                    className="text-sm text-gray-600 hover:text-black"
+                    className="text-sm text-gray-800 hover:text-black"
                   >
                     {link.label}
                   </Link>

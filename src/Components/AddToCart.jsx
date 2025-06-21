@@ -7,6 +7,7 @@ const AddToCart = () => {
   const [currency, setCurrency] = useState("PKR");
   const [exchangeRate] = useState(280);
   const [editModes, setEditModes] = useState({});
+  const [showCurrencyMenu, setShowCurrencyMenu] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,13 +62,51 @@ const AddToCart = () => {
 
   return (
     <div>
-<Nax/>
+
+  <Nax/>
     <div className="min-h-screen px-4 py-10 bg-white text-gray-800">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex justify-between items-center mb-10">
-          <h1 className="text-4xl font-bold text-center w-full">Your basket</h1>
+      <div className="max-w-5xl mx-auto relative">
+        {/* Currency Button - Top Right */}
+        <div className="absolute right-0 top-0">
+          <button
+            onClick={() => setShowCurrencyMenu(!showCurrencyMenu)}
+            className="px-2 py-1 text-sm border border-gray-300 text-[#f26322] rounded hover:bg-orange-100"
+            title="Change currency"
+          >
+            {currency}
+          </button>
+          {showCurrencyMenu && (
+            <div className="mt-2 right-0 bg-white border border-gray-200 rounded shadow text-sm absolute z-10">
+              <button
+                onClick={() => {
+                  setCurrency("PKR");
+                  setShowCurrencyMenu(false);
+                }}
+                className={`block w-full px-3 py-1 text-left hover:bg-orange-100 ${
+                  currency === "PKR" ? "bg-orange-100 font-semibold" : ""
+                }`}
+              >
+                PKR
+              </button>
+              <button
+                onClick={() => {
+                  setCurrency("USD");
+                  setShowCurrencyMenu(false);
+                }}
+                className={`block w-full px-3 py-1 text-left hover:bg-orange-100 ${
+                  currency === "USD" ? "bg-orange-100 font-semibold" : ""
+                }`}
+              >
+                USD
+              </button>
+            </div>
+          )}
         </div>
 
+        {/* Title */}
+        <h1 className="text-4xl font-bold text-center mb-10">Your basket</h1>
+
+        {/* Continue Shopping Button */}
         <div className="text-center mb-8">
           <button
             onClick={() => navigate("/productview")}
@@ -77,6 +116,7 @@ const AddToCart = () => {
           </button>
         </div>
 
+        {/* Cart Items */}
         {cartItems.length === 0 ? (
           <p className="text-center text-gray-500">Your cart is empty.</p>
         ) : (
@@ -118,7 +158,9 @@ const AddToCart = () => {
                           value={item.quantity || 1}
                           min="1"
                           className="w-14 border border-gray-300 px-2 py-1 text-center"
-                          onChange={(e) => handleQuantityChange(index, e.target.value)}
+                          onChange={(e) =>
+                            handleQuantityChange(index, e.target.value)
+                          }
                         />
                       </td>
                       <td className="align-top pt-2 font-medium">
@@ -169,7 +211,9 @@ const AddToCart = () => {
                           value={item.quantity || 1}
                           min="1"
                           className="w-16 border border-gray-300 px-2 py-1 text-center"
-                          onChange={(e) => handleQuantityChange(index, e.target.value)}
+                          onChange={(e) =>
+                            handleQuantityChange(index, e.target.value)
+                          }
                         />
                       </div>
                       <button
@@ -184,11 +228,15 @@ const AddToCart = () => {
               ))}
             </div>
 
+            {/* Totals & Actions */}
             <div className="text-right mt-10 space-y-2">
               <p className="text-lg font-semibold">
-                Subtotal: {currency === "USD" ? `$${getTotal()}` : `Rs.${getTotal()}`}
+                Subtotal:{" "}
+                {currency === "USD" ? `$${getTotal()}` : `Rs.${getTotal()}`}
               </p>
-              <p className="text-sm text-gray-500">Postage calculated at checkout</p>
+              <p className="text-sm text-gray-500">
+                Postage calculated at checkout
+              </p>
               <div className="flex justify-end gap-4 mt-4">
                 <button
                   onClick={handleUpdate}
@@ -208,8 +256,9 @@ const AddToCart = () => {
         )}
       </div>
     </div>
-        </div>
+      </div>
   );
 };
 
 export default AddToCart;
+

@@ -62,37 +62,62 @@ export const updateSubmissionById = createAsyncThunk(
   }
 );
 
+export const getLetters = createAsyncThunk(
+  "submission/getLetters",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosinstacne.get("/submissions/letters");
+      console.log(response.data)
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Error fetching letters");
+    }
+  }
+);
 
+export const getPhotographs = createAsyncThunk(
+  "submission/getPhotographs",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosinstacne.get("/submissions/photographs");
+      console.log(response.data)
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Error fetching photographs");
+    }
+  }
+);
 
 const submissionslice = createSlice({
     name:"submisiions",
-    initialState:{
-       submission :[],
-       loading:false,
+  initialState: {
+       submission: [],
+       photographs: [],
+       letters: [],
+       loading: false,
        singlesubmission: null,
-        error: null
-
+       error: null
     },
     reducers:{
 
     },
     extraReducers:(builder)=>{
-        builder.addCase(postsubmissiondata.pending , (state , action)=>{
+ builder.addCase(postsubmissiondata.pending , (state , action)=>{
              state.submission = [];
         state.loading = true;
         state.error = null
         }),
-            builder.addCase(postsubmissiondata.fulfilled,(state,action)=>{
+builder.addCase(postsubmissiondata.fulfilled,(state,action)=>{
                 state.submission = [];
                 state.error = null;
         state.loading = false;
 
               }),
-               builder.addCase(postsubmissiondata.rejected,(state,action)=>{
+ builder.addCase(postsubmissiondata.rejected,(state,action)=>{
                       state.submission = [];
                       state.error = action.error.message;
                     });
-                    builder.addCase(getsubmissionsdata.pending, (state) => {
+ builder.addCase(getsubmissionsdata.pending, (state) => {
   state.loading = true;
   state.error = null;
 });
@@ -135,7 +160,30 @@ builder.addCase(updateSubmissionById.rejected, (state, action) => {
   state.loading = false;
   state.error = action.payload;
 });
-
+builder.addCase(getLetters.pending , (state , action)=>{
+  state.loading = true;
+});
+  builder.addCase(getLetters.fulfilled, (state, action) => {
+      state.loading = false;
+      state.letters = action.payload.data || action.payload;
+      state.error = null;
+    });
+builder.addCase(getLetters.rejected , (state , action)=>{
+ state.loading = false;
+        state.error = action.payload;
+});
+builder.addCase(getPhotographs.pending , (state , action)=>{
+  state.loading = true;
+});
+ builder.addCase(getPhotographs.fulfilled, (state, action) => {
+      state.loading = false;
+      state.photographs = action.payload.data || action.payload;
+      state.error = null;
+    });
+builder.addCase(getPhotographs.rejected , (state , action)=>{
+ state.loading = false;
+        state.error = action.payload;
+});
 
     }
 });
