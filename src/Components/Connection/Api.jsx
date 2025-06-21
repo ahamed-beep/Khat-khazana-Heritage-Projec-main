@@ -3,7 +3,8 @@ import axios from "axios";
 const baseURL =
   window.location.hostname === "localhost"
     ? "http://localhost:5000/api"
-    : "https://backend-heritage-project-production.up.railway.app/api"; 
+    : "https://backend-production-e8fe.up.railway.app/api"; 
+
 
 const axiosinstacne = axios.create({
   baseURL,
